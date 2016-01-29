@@ -8,32 +8,37 @@ import React, {
 } from 'react-native'
 import SideMenu from 'react-native-side-menu'
 import Menu from './Menu'
+import ScrollableTabView from 'react-native-scrollable-tab-view'
 
-export default class Main extends Component {
+class Main extends Component {
   constructor (props) {
     super(props)
+
     this.state = {
       isOpen: false
     }
+
   }
 
   // Changes sidemenu state and should be passed down as Prop.
-  _toggle () {
+  toggleMenu () {
     this.setState({
       isOpen: !this.state.isOpen
     })
   }
 
-  _updateMenuState (isOpen) {
+  updateMenuState (isOpen) {
     this.setState({isOpen})
   }
+
   render () {
     const menu = <Menu navigator={navigator}/>
     return (
       <SideMenu
         menu={menu}
         isOpen={this.state.isOpen}
-        onChange={(isOpen) => this._updateMenuState(isOpen)} >
+        onChange={(isOpen) => this.updateMenuState(isOpen)}
+      >
         <View style={styles.container}>
           <Text style={styles.welcome}>
             Welcome to React Native!
@@ -69,3 +74,5 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+
+export default Main
